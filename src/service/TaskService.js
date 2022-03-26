@@ -1,0 +1,19 @@
+const Task = require("../models/Task");
+
+exports.findById = async (id) => {
+  return await Task.findById({
+    _id: id,
+  });
+}
+
+exports.persist = async (description) => {
+  return await Task.create({
+    description: description,
+  });
+}
+
+exports.store = async (id, description, finished_at) => {
+  return await Task.updateOne({
+    _id: id,
+  }, { description: description, finished_at:  new Date(finished_at)});
+}
