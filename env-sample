@@ -1,0 +1,5 @@
+NODE_ENV=development
+PORT=3000
+MONGO_URI=mongodb://db/todo-list
+SALT_ROUNDS_HASH=10
+SECRET_JWT=diadecodar
