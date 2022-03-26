@@ -6,7 +6,7 @@ exports.index = async (request, response) => {
     const projects = await projectService.findAll();
     return response.status(200).json({
       status: 200,
-      data: projects,
+      items: projects,
     })
   } catch(error) {
     return response.status(400).json({
@@ -67,6 +67,24 @@ exports.associateUser = async (request, response) => {
   return response.status(201).json({
     status: 200,
     message: "Project associated with user sucessfully",
+  });
+}
+
+exports.associateTask = async (request, response) => {
+  const { task } = request.body;
+  const { id } = request.params;
+  try {
+    await projectService.associateTask(id, task);
+  } catch(error) {
+    return response.status(400).json({
+      status: 400,
+      message: error.message
+    })
+  }
+  
+  return response.status(201).json({
+    status: 200,
+    message: "Project associated with task sucessfully",
   });
 }
 

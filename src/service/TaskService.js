@@ -8,12 +8,12 @@ exports.findById = async (id) => {
 
 exports.persist = async (description) => {
   return await Task.create({
-    description: description,
+    description,
   });
 }
 
-exports.store = async (id, description, finished_at) => {
+exports.store = async (id, description, finished_at, status) => {
   return await Task.updateOne({
     _id: id,
-  }, { description: description, finished_at:  new Date(finished_at)});
+  }, { description, finished_at:  new Date(finished_at), status});
 }

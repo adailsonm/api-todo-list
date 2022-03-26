@@ -19,6 +19,7 @@ router.get("/projects", projectController.index)
 router.post("/projects", projectController.create);
 router.delete("/projects/:id", projectController.destroy);
 router.put("/projects/:id/associate/user", projectController.associateUser)
+router.put("/projects/:id/associate/task", projectController.associateTask)
 
 router.post("/tasks", taskController.create);
 router.put("/tasks/:id", taskController.store)
