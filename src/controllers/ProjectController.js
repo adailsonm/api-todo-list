@@ -1,9 +1,11 @@
 const projectService = require('../service/ProjectService');
+const userService = require('../service/UserService');
 
 
 exports.index = async (request, response) => {
   try {
-    const projects = await projectService.findAll();
+    let { _id } = await userService.findByEmail(request.user.email);
+    const projects = await projectService.findAllWithUser(_id);
     return response.status(200).json({
       status: 200,
       items: projects,

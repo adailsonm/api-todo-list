@@ -1,4 +1,6 @@
 const express = require("express");
+const { verifyUserByJWT } = require("../middleware");
+
 const userController = require("../controllers/UserController");
 const projectController = require("../controllers/ProjectController");
 const taskController = require("../controllers/TaskController");
@@ -11,17 +13,17 @@ router.get("/healthcheck", (req, res) => {
   })
 })
 
-router.post("/users", userController.create)
+router.post("/users",verifyUserByJWT, userController.create)
 router.post("/users/login", userController.login)
-router.get("/users/search", userController.search)
+router.get("/users/search",verifyUserByJWT, userController.search)
 
-router.get("/projects", projectController.index)
-router.post("/projects", projectController.create);
-router.delete("/projects/:id", projectController.destroy);
-router.put("/projects/:id/associate/user", projectController.associateUser)
-router.put("/projects/:id/associate/task", projectController.associateTask)
+router.get("/projects", verifyUserByJWT, projectController.index)
+router.post("/projects", verifyUserByJWT, projectController.create);
+router.delete("/projects/:id", verifyUserByJWT, projectController.destroy);
+router.put("/projects/:id/associate/user",verifyUserByJWT, projectController.associateUser)
+router.put("/projects/:id/associate/task", verifyUserByJWT, projectController.associateTask)
 
-router.post("/tasks", taskController.create);
-router.put("/tasks/:id", taskController.store)
+router.post("/tasks", verifyUserByJWT, taskController.create);
+router.put("/tasks/:id", verifyUserByJWT, taskController.store)
 
 module.exports = router;
