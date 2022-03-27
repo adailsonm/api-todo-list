@@ -35,6 +35,6 @@ exports.store = async (request, response) => {
   
   return response.status(200).json({
     status: 201,
-    message: "Task created sucessfully",
+    message: "Task updated sucessfully",
   });
 }

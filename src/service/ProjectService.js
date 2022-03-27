@@ -17,8 +17,18 @@ exports.findAllWithUser = async (userId) => {
   return projects;
 }
 
-exports.findById= async (id) => {
-  return await Project.findOne({ _id: id}).select('-__v');
+exports.findById = async (id, userId) => {
+  let project =  await Project.findOne({ _id: id}).populate([
+    { path: "users", select: 'name', match: {_id: userId }},
+    { path: 'tasks', select: [
+      'description', 'finished_at', 'status'
+    ]}
+  ]).select('-__v');
+  let isAssociateUserWithProject = project.users.some(user => user !== null);
+  if(!isAssociateUserWithProject) {
+    throw new Error('Not found projects associate by user')
+  }
+  return project;
 }
 
 exports.persist = async (name, userId) => {

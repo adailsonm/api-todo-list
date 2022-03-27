@@ -17,7 +17,8 @@ router.post("/users",verifyUserByJWT, userController.create)
 router.post("/users/login", userController.login)
 router.get("/users/search",verifyUserByJWT, userController.search)
 
-router.get("/projects", verifyUserByJWT, projectController.index)
+router.get("/projects", verifyUserByJWT, projectController.index);
+router.get("/projects/:id", verifyUserByJWT, projectController.findById);
 router.post("/projects", verifyUserByJWT, projectController.create);
 router.delete("/projects/:id", verifyUserByJWT, projectController.destroy);
 router.put("/projects/:id/associate/user",verifyUserByJWT, projectController.associateUser);

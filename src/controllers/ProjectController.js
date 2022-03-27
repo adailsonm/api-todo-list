@@ -89,3 +89,20 @@ exports.associateTask = async (request, response) => {
   });
 }
 
+exports.findById = async(request, response) => {
+  const { id } = request.params;
+  try {
+    let result = await projectService.findById(id, request.user._id);
+    return response.status(200).json({
+      status: 200,
+      item: result
+    })
+  } catch(error) {
+    return response.status(400).json({
+      status: 400,
+      message: error.message
+    })
+  }
+
+}
+
