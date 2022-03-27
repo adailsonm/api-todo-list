@@ -13,7 +13,7 @@ router.get("/healthcheck", (req, res) => {
   })
 })
 
-router.post("/users",verifyUserByJWT, userController.create)
+router.post("/users", userController.create)
 router.post("/users/login", userController.login)
 router.get("/users/search",verifyUserByJWT, userController.search)
 

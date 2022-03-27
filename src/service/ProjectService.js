@@ -1,9 +1,11 @@
 const Project = require('../models/Project');
 
 exports.findAllWithUser = async (userId) => {
-  let projects = await Project.find({})
-    .populate([
-      { path: "users", select: 'name', match: {_id: userId }},
+  console.log(userId);
+  let projects = await Project.find({
+    users: {$in: [userId]},
+    }).populate([
+      { path: "users", select: 'name'},
       { path: 'tasks', select: [
         'description', 'finished_at', 'status'
       ]}
@@ -12,9 +14,10 @@ exports.findAllWithUser = async (userId) => {
   let isAssociateUserWithProject = projects.some(project => project.users.length > 0)
   if(!isAssociateUserWithProject) {
     throw new Error('Not found projects associate by user')
+  } else {
+    return projects;
   }
 
-  return projects;
 }
 
 exports.findById = async (id, userId) => {
