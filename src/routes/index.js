@@ -23,7 +23,7 @@ router.delete("/projects/:id", verifyUserByJWT, projectController.destroy);
 router.put("/projects/:id/associate/user",verifyUserByJWT, projectController.associateUser);
 router.put("/projects/:id/associate/task", verifyUserByJWT, projectController.associateTask);
 
-router.post("/tasks/:projectId/associate/project", verifyUserByJWT, taskController.createAndAssociateProject);
+router.post("/projects/:projectId/associate/task", verifyUserByJWT, taskController.createAndAssociateProject);
 router.put("/tasks/:id", verifyUserByJWT, taskController.store)
 
 module.exports = router;

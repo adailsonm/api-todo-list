@@ -10,7 +10,7 @@ services:
       - 27017:27017
     restart: always
     volumes:
-      - ./mongo_db:/data/db
+      - ./data:/data/db
     networks:
       - local
   web:
