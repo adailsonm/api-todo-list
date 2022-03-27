@@ -4,8 +4,7 @@ const userService = require('../service/UserService');
 
 exports.index = async (request, response) => {
   try {
-    let { _id } = await userService.findByEmail(request.user.email);
-    const projects = await projectService.findAllWithUser(_id);
+    const projects = await projectService.findAllWithUser(request.user._id);
     return response.status(200).json({
       status: 200,
       items: projects,
@@ -22,7 +21,7 @@ exports.create = async (request, response) => {
   const { name } = request.body;
 
   try {
-    await projectService.persist(name);
+    await projectService.persist(name, request.user._id);
   } catch(error) {
     return response.status(400).json({
       status: 400,

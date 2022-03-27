@@ -5,6 +5,5 @@ const taskSchema = new Schema({
   created_at: { type: Date, default: Date.now },
   finished_at: { Type: Date },
   status: { type: Number, default: 1 }
-})
-
+});
 module.exports = model("Task", taskSchema)

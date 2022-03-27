@@ -61,6 +61,7 @@ exports.login = async (request, response) => {
   }
 
   const payload = {
+    _id: user._id,
     name: user.name,
     email: user.email
   }

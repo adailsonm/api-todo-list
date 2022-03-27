@@ -21,10 +21,13 @@ exports.findById= async (id) => {
   return await Project.findOne({ _id: id}).select('-__v');
 }
 
-exports.persist = async (name) => {
-  return await Project.create({
-    name: name,
-  });
+exports.persist = async (name, userId) => {
+  let project = new Project();
+  project.name = name;
+  project.users.push(
+    userId
+  )
+  await project.save();
 }
 
 exports.remove = async (id) => {
