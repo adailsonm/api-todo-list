@@ -1,10 +1,13 @@
 const taskService = require('../service/TaskService');
+const projectService = require('../service/ProjectService');
 
-exports.create = async (request, response) => {
+exports.createAndAssociateProject = async (request, response) => {
   const { description } = request.body;
-
   try {
-    await taskService.persist(description);
+    const { projectId } = request.params;
+    
+    let result = await taskService.persist(description);
+    await projectService.associateTask(projectId, result._id);
   } catch(error) {
     return response.status(400).json({
       status: 400,
@@ -14,7 +17,7 @@ exports.create = async (request, response) => {
   
   return response.status(201).json({
     status: 201,
-    message: "Task created sucessfully",
+    message: "Task created and associate with project sucessfully",
   });
 }
 

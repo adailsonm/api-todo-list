@@ -20,10 +20,10 @@ router.get("/users/search",verifyUserByJWT, userController.search)
 router.get("/projects", verifyUserByJWT, projectController.index)
 router.post("/projects", verifyUserByJWT, projectController.create);
 router.delete("/projects/:id", verifyUserByJWT, projectController.destroy);
-router.put("/projects/:id/associate/user",verifyUserByJWT, projectController.associateUser)
-router.put("/projects/:id/associate/task", verifyUserByJWT, projectController.associateTask)
+router.put("/projects/:id/associate/user",verifyUserByJWT, projectController.associateUser);
+router.put("/projects/:id/associate/task", verifyUserByJWT, projectController.associateTask);
 
-router.post("/tasks", verifyUserByJWT, taskController.create);
+router.post("/tasks/:projectId/associate/project", verifyUserByJWT, taskController.createAndAssociateProject);
 router.put("/tasks/:id", verifyUserByJWT, taskController.store)
 
 module.exports = router;

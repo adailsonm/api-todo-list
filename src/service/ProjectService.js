@@ -9,7 +9,6 @@ exports.findAllWithUser = async (userId) => {
       ]}
     ])
     .select('-__v');
-  console.log(projects);
   let isAssociateUserWithProject = projects.some(project => project.users.length > 0)
   if(!isAssociateUserWithProject) {
     throw new Error('Not found projects associate by user')
