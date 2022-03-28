@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userService = require('../service/UserService');
 const { secretJwt } = require("../config/index");
+const { verifyRefresh } = require("../helpers");
 
 exports.create = async (request, response) => {
   const data = request.body;
@@ -72,10 +73,28 @@ exports.login = async (request, response) => {
     token: jwt.sign(payload, secretJwt, {
       expiresIn: '2h'
     }),
+    refreshToken: jwt.sign(payload, 'refreshSecret', {
+      expiresIn: '4h'
+    }),
   })
 
 }
 
+exports.refreshToken = async(request, response) => {
+  const { payload, refreshToken } = request.body;
+  const isValid = verifyRefresh(payload, refreshToken);
+
+  if (!isValid) {
+    return response
+      .status(401)
+      .json({ status: 401, message: "Invalid token,try login again" });
+  }
+
+  const accessToken = jwt.sign(payload, "accessSecret", {
+    expiresIn: "2h",
+  });
+  return response.status(200).json({ success: 200, accessToken });
+}
 exports.search = async (request, response) => {
   const { name } = request.query;
   try {

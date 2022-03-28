@@ -16,7 +16,7 @@ router.get("/healthcheck", (req, res) => {
 router.post("/users", userController.create)
 router.post("/users/login", userController.login)
 router.get("/users/search",verifyUserByJWT, userController.search)
-
+router.post('/users/refresh', userController.refreshToken)
 router.get("/projects", verifyUserByJWT, projectController.index);
 router.get("/projects/:id", verifyUserByJWT, projectController.findById);
 router.post("/projects", verifyUserByJWT, projectController.create);
