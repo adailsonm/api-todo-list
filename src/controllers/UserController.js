@@ -66,6 +66,7 @@ exports.login = async (request, response) => {
     email: user.email
   }
 
+  
   return response.json({
     name: user.name,
     token: jwt.sign(payload, secretJwt, {

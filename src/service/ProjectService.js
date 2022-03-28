@@ -1,7 +1,6 @@
 const Project = require('../models/Project');
 
 exports.findAllWithUser = async (userId) => {
-  console.log(userId);
   let projects = await Project.find({
     users: {$in: [userId]},
     }).populate([

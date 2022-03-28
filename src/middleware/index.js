@@ -1,4 +1,4 @@
-const { decode } = require("jsonwebtoken");
+const { verify } = require("jsonwebtoken");
 const { secretJwt } = require("../config");
 
 exports.verifyUserByJWT = (request, response, next) => {
@@ -13,7 +13,8 @@ exports.verifyUserByJWT = (request, response, next) => {
 
   try {
     const [, token] = authorization.split(" ");
-    const decodedToken = decode(token, secretJwt);
+    
+    const decodedToken = verify(token, secretJwt);
 
     request.user = { ...decodedToken };
     next();

@@ -10,6 +10,7 @@ exports.index = async (request, response) => {
       items: projects,
     })
   } catch(error) {
+    console.log(error);
     return response.status(400).json({
       status: 400,
       message: error.message
