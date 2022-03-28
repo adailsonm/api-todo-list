@@ -18,7 +18,6 @@ exports.verifyUserByJWT = (request, response, next) => {
     request.user = { ...decodedToken };
     next();
   } catch (err) {
-    console.log(err);
     return response
       .status(500)
       .json({ status: 500, message: "Token authentication failed" });
