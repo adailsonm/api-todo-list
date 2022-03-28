@@ -38,3 +38,20 @@ exports.store = async (request, response) => {
     message: "Task updated sucessfully",
   });
 }
+
+exports.destroy = async (request, response) => {
+  const { id } = request.params;
+  try {
+    await taskService.destroy(id);
+  } catch(error) {
+    return response.status(400).json({
+      status: 400,
+      message: error.message
+    })
+  }
+  
+  return response.status(200).json({
+    status: 201,
+    message: "Task updated sucessfully",
+  });
+}
