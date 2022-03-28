@@ -82,6 +82,7 @@ exports.login = async (request, response) => {
 
 exports.refreshToken = async(request, response) => {
   const { payload, refreshToken } = request.body;
+  console.log(payload);
   const isValid = verifyRefresh(payload, refreshToken);
 
   if (!isValid) {
