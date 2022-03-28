@@ -52,6 +52,6 @@ exports.destroy = async (request, response) => {
   
   return response.status(200).json({
     status: 201,
-    message: "Task updated sucessfully",
+    message: "Task deleted sucessfully",
   });
 }
